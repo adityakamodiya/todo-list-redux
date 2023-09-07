@@ -16,34 +16,23 @@ function Home() {
    
                     dispatch(fetchapi(selector.currentstat))
               
-  }, [selector.currentstat])
+                    console.log(selector.arr.id)
+                  }, [selector.currentstat])
 
-  
-  console.log(selector.arr)
-
-  return (
+  return(
+    
     <>
-      <div id='wrapper'>
-        
-      
+    <div id='wrapper'>
+     <div className='box'>
+          {(selector.loader)?<div><h2>Loading...</h2></div>:<img src={ selector.arr.thumbnail}></img>}
           
-
-          
-                    {
-                   
-         <div className='box'>
-          {(selector.loader)?<p>loading</p>:''}
-          {/* <img src={ selector.arr[0].thumbnail}></img> */}
           
           
         
-         {/* <h3>{selector.arr[selector.currentstat].title}</h3> */}
+         <h3>{selector.arr.title}</h3>
     
          </div>
-        
-        }
-      
-        { (selector.currentstat != 1)?
+         { (selector.currentstat != 1)?
         <button className='previous'onClick={(e)=>dispatch(previousproduct())} >previous</button>:
         <button disabled >previous</button>
       }
@@ -51,10 +40,13 @@ function Home() {
         <button className='next' onClick={(e)=>dispatch(nextproduct())}>next</button>:
         <button disabled>next</button>
       }
-      
-      </div>
+</div>
     </>
   )
+  
+
+  
+  
 }
 
 export default Home

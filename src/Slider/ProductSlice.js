@@ -3,11 +3,15 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 let i = 1;
 export const fetchapi = createAsyncThunk('takelink', async (currentstat) => {
-
+    if(currentstat==1){
+    const response = await axios.get("https://dummyjson.com/products/1" )
+    return response.data}
+if(currentstat>1){
     const response = await axios.get("https://dummyjson.com/products/" + currentstat)
+    return response.data}
 
     // console.log(response.data)
-    return response.data
+    
 
 })
 
