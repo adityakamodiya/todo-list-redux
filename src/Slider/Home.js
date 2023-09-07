@@ -1,53 +1,49 @@
 import axios from 'axios'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { previousproduct, nextproduct } from './ProductSlice'
 import { fetchapi } from './ProductSlice'
 import "./slider.css"
 
 function Home() {
-
   
   const selector = useSelector((state) => { return state.slicered })
   const dispatch = useDispatch();
 
-  // console.log(selector.loader)
 
   
-  let   i =0
-  let res
   useEffect(() => { 
    
-                    // dispatch(Callapi(res.data.products[i].thumbnail))
-                    dispatch(fetchapi())
-                    // setbackImg(res.data.products[i].thumbnail)
+                    dispatch(fetchapi(selector.currentstat))
               
-  }, [])
+  }, [selector.currentstat])
 
   
-  
+  console.log(selector.arr)
 
-  // console.log(res)
   return (
     <>
       <div id='wrapper'>
-        {selector.arr.map((res,index)=>{
+        
+      
           
-          if(selector.currentstat == index)
+
           
                     {
-                      
-         return(
+                   
          <div className='box'>
-           {  (selector.loader)?
-          <img src={ selector.arr[selector.currentstat].thumbnail}></img>
-          :<p>loading...</p>
-        }
+          {(selector.loader)?<p>loading</p>:''}
+          {/* <img src={ selector.arr[0].thumbnail}></img> */}
+          
+          
+        
+         {/* <h3>{selector.arr[selector.currentstat].title}</h3> */}
     
-        </div>)}
-})}
+         </div>
+        
+        }
       
-        { (selector.currentstat != 0)?
+        { (selector.currentstat != 1)?
         <button className='previous'onClick={(e)=>dispatch(previousproduct())} >previous</button>:
         <button disabled >previous</button>
       }
